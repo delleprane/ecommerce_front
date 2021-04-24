@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 
-export class Products extends Component {
+class Products extends Component {
   state = {
     allproducts: [],
   };
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <h1>PRODUCTS</h1>
+      </div>
+    );
   }
 }
 
