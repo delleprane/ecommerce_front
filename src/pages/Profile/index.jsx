@@ -19,6 +19,8 @@ class Profile extends Component {
          <div>
             <h1>Perfil</h1>
             {profile.name}
+            {profile.email}
+            {profile.email}
          </div>
       );
    };
