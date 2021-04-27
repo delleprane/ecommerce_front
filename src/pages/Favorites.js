@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 
-class Favotites extends Component {
+class Favorites extends Component {
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <h1>Favorites</h1>
+      </div>
+    );
   }
 }
 
-export default Favotites;
+export default Favorites;

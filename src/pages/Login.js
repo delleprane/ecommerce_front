@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import api from "../services/api.jsx";
 
 class Login extends Component {
   state = {
@@ -16,7 +17,7 @@ class Login extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // await api.login(this.state);
+      await api.login(this.state);
       // this.props.handleLogin(true);
       this.props.history.push("/products");
     } catch (error) {
