@@ -19,9 +19,18 @@ export default api;
 //       const { token } = data;
 //       localStorage.setItem("token", token);
 //     } catch (error) {
-      
-}
+
 //   };
+
+// getProducts = async () => {
+//   try {
+//     const { data } = await this.api.get(`/products`);
+//     return data;
+//   } catch (error) {
+//     throw Error(error);
+//   }
+// };
+
 // }
 
 // export default new Api();
