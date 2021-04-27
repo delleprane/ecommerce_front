@@ -1,20 +1,25 @@
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
+import Profile from "./pages/Profile";
+
 import Navbar from "./components/NavBar/Navbar.jsx";
-import Products from "./pages/Products";
-import Login from "./pages/Login";
-import Favorites from "./pages/Favorites";
-import { Switch, Route } from "react-router-dom";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/products/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
 
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/products" component={Products} />
-        <Route path="/perfil/favorites" component={Favorites} />
-      </Switch>
+          <Route path="*" element={<h1>Not found 404!</h1>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
