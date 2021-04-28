@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import SignIn from './pages/Login'
 import Profile from './pages/Profile'
+import AddAdress from './pages/Register/Address'
 
 
 import Navbar from './components/NavBar/Navbar.jsx';
@@ -19,6 +20,7 @@ function App() {
                <Route path='/signup' element={<SignUp />} />
                <Route path='/signin' element={<SignIn />} />
                <Route path='/profile' element={<Profile />} />
+               <Route path='/addAddress' element={<AddAdress />} />
 
                <Route path='*' element={<h1>Not found 404!</h1>} />
             </Routes>

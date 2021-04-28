@@ -27,10 +27,12 @@ class Address extends Component {
             {address.length === 0 ?
 
                <div>
-                  <br/>
+                  <br />
                   <h3>Verificamos que não existem Endereços cadastrados, deseja adicionar endereço?</h3>
-                  <br/>
-                  <button>Cadastrar Endereço</button>
+                  <br />
+                  <a href="/addAddress">
+                        <button >Cadastrar Endereço</button>
+                  </a>
                </div>
 
                :

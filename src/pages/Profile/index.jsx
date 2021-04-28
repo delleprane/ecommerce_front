@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 import { getIdUsuario } from '../../services/auth';
+
 import Address from '../../components/Address'
 import './Profile.css';
 class Profile extends Component {
@@ -31,6 +32,7 @@ class Profile extends Component {
                   {profile.email}
                </div>
             </div>
+            <button>Editar</button>
             <br />
             <br />
             <Address />
