@@ -24,6 +24,7 @@ class Api {
   getProduct = async (id) => {
     try {
       const response = await this.api.get(`/products/${id}`);
+      console.log(response);
       return response.data;
     } catch (error) {
       console.error(error);
