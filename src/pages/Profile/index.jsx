@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
+import {getIdUsuario} from '../../services/auth';
 class Profile extends Component {
    state = {
       profile: [],
    }
 
-   //Lembrar de pegar ID no localStorage
    async componentDidMount() {
-      const response = await api.get('perfil/606d07330b45613d1c9ee0cc');
+      var idUsuario = getIdUsuario()
+      const response = await api.get('perfil/'+idUsuario);
       console.log(response)
       this.setState({ profile: response.data })
    }
@@ -18,9 +19,12 @@ class Profile extends Component {
       return (
          <div>
             <h1>Perfil</h1>
+            <div>
             {profile.name}
+            </div>
+            <div>
             {profile.email}
-            {profile.email}
+            </div>
          </div>
       );
    };
