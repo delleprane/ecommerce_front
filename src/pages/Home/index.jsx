@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
+import './Product.css'
 
 class Home extends Component {
    constructor(props) {
@@ -24,13 +25,20 @@ class Home extends Component {
          <div>
 
             <h1>Produtos</h1>
-            {product.map(product => (
-               <li key={product.id}>
-                  {product.image}
-                  {product.name}
-                  R${product.value}
-               </li>
-            ))}
+            <div className='container'>
+
+               <div className='product-list' >
+                  {product.map(product => (
+                     <div className='product-item' key={product.id}>
+                        <img src={product.image} alt={product.name} />
+                        <div className='name'>{product.name}</div>
+                        <div className='value'>R${product.value}</div>
+                     </div>
+                  ))}
+               </div>
+
+            </div>
+
 
 
          </div>
