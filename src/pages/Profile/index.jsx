@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
-import {getIdUsuario} from '../../services/auth';
+import { getIdUsuario } from '../../services/auth';
+import Address from '../../components/Address'
+import './Profile.css';
 class Profile extends Component {
    state = {
       profile: [],
    }
 
+
    async componentDidMount() {
       var idUsuario = getIdUsuario()
-      const response = await api.get('perfil/'+idUsuario);
-      console.log(response)
-      this.setState({ profile: response.data })
+      const response = await api.get('perfil/' + idUsuario);
+      this.setState({
+         profile: response.data,
+      })
    }
 
    render() {
@@ -18,13 +22,18 @@ class Profile extends Component {
 
       return (
          <div>
-            <h1>Perfil</h1>
             <div>
-            {profile.name}
+               <h1>Perfil</h1>
+               <div>
+                  {profile.name}
+               </div>
+               <div>
+                  {profile.email}
+               </div>
             </div>
-            <div>
-            {profile.email}
-            </div>
+            <br />
+            <br />
+            <Address />
          </div>
       );
    };
