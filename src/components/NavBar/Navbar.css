@@ -17,6 +17,11 @@
     height: 64px;
 }
 
+.navbar-logo a {
+    height: 64px;
+    display: flex;
+}
+
 .fa-react {
     margin-left: 0.5rem;
     font-size: 1.6rem;

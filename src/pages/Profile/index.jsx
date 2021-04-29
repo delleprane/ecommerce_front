@@ -1,29 +1,44 @@
-import React, { Component } from "react";
-import api from "../../services/api";
+import React, { Component } from 'react';
+import api from '../../services/api';
+
+import Address from '../../components/Address'
+import './Profile.css';
 class Profile extends Component {
-  state = {
-    profile: [],
-  };
+   state = {
+      profile: {},
+   };
 
-  //Lembrar de pegar ID no localStorage
-  async componentDidMount() {
-    const response = await api.get("perfil/606d07330b45613d1c9ee0cc");
-    console.log(response);
-    this.setState({ profile: response.data });
-  }
+   componentDidMount = async () => {
+      try {
+         const response = await api.getProfile();
+         this.setState({ profile: response })
+         
+      } catch (error) {
+         console.error(error);
+      };
+   }
 
-  render() {
-    const { profile } = this.state;
+   render() {
+      const { profile } = this.state;
 
-    return (
-      <div>
-        <h1>Perfil</h1>
-        {profile.name}
-        {profile.email}
-        {profile.email}
-      </div>
-    );
-  }
+      return (
+         <div>
+            <div>
+               <h1>Perfil</h1>
+               <div>
+                  {profile.name}
+               </div>
+               <div>
+                  {profile.email}
+               </div>
+            </div>
+            <button>Editar</button>
+            <br />
+            <br />
+            <Address />
+         </div>
+      );
+   };
 }
 
 export default Profile;
