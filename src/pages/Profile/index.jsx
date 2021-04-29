@@ -24,15 +24,16 @@ class Profile extends Component {
       return (
          <div>
             <div>
+               <br/>
                <h1>Perfil</h1>
+               <br/>
                <div>
-                  {profile.name}
+                  Nome: {profile.name}
                </div>
                <div>
-                  {profile.email}
+                  E-mail: {profile.email}
                </div>
             </div>
-            <br />
             <br />
             <Address />
          </div>

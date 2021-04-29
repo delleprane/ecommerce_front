@@ -5,6 +5,7 @@ import SignUp from './pages/SignUp'
 import SignIn from './pages/Login'
 import Profile from './pages/Profile'
 import AddAdress from './pages/Register/Address'
+import EditAdress from './pages/Edit/Address'
 import Product from "./pages/Product/index";
 
 import Navbar from "./components/NavBar/Navbar.jsx";
@@ -17,6 +18,7 @@ function App() {
          <Switch>
             <Route exact path="/" component={Home} />
             <Route path='/addAddress' component={AddAdress} />
+            <Route path='/editAddress/:idaddress' component={EditAdress} />
             <Route path='/signin' component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/profile" component={Profile} />
