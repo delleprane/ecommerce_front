@@ -16,7 +16,7 @@ class index extends Component {
   };
 
   render() {
-    const { product } = this.state;
+    const { product } = this.state
     return (
       <div>
         <h1>one product</h1>

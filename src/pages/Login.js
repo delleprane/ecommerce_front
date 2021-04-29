@@ -18,7 +18,7 @@ class Login extends Component {
     event.preventDefault();
     try {
       await api.login(this.state);
-      // this.props.handleLogin(true);
+      this.props.handleLogin(true);
       this.props.history.push("/products");
     } catch (error) {
       console.log(error);

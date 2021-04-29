@@ -21,6 +21,14 @@ class Api {
     } catch (error) {}
   };
 
+  signup = async (payload) => {
+    try {
+      await this.api.post("/auth/signup", payload);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   getProduct = async (id) => {
     try {
       const response = await this.api.get(`/products/${id}`);
