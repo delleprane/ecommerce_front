@@ -5,19 +5,20 @@ import './Navbar.css';
 
 class Navbar extends Component {
    state = {
-      clicked: false
+      clicked: false,
    }
 
-   token = getToken();
-   name = getNomeUsuario();
-
-
+   
    handleClick = () => {
       this.setState({ clicked: !this.state.clicked })
    }
-
+   
+      token = getToken();
+      name = getNomeUsuario();
+      
 
    render() {
+
       return (
          <nav className="NavbarItens">
             <h1 className="navbar-logo">

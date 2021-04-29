@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import api from '../../services/api';
 
-import { getIdUsuario } from '../../services/auth';
 
 class Address extends Component {
    state = {
-      address: [],
+      address: []
    }
 
 
-   async componentDidMount() {
-      var idUsuario = getIdUsuario()
-      const response = await api.get('perfil/address/' + idUsuario);
-      console.log(response.data.length)
-      this.setState({
-         address: response.data
-      })
+   componentDidMount = async () => {
+      try {
+         const response = await api.getAddress();
+         this.setState({ address: response })
+      } catch (error) {
+         console.error(error);
+      };
    }
 
    render() {
@@ -24,6 +23,7 @@ class Address extends Component {
       return (
          <div>
             <h1>Endereços</h1>
+            
             {address.length === 0 ?
 
                <div>
@@ -31,7 +31,7 @@ class Address extends Component {
                   <h3>Verificamos que não existem Endereços cadastrados, deseja adicionar endereço?</h3>
                   <br />
                   <a href="/addAddress">
-                        <button >Cadastrar Endereço</button>
+                     <button >Cadastrar Endereço</button>
                   </a>
                </div>
 
@@ -55,7 +55,7 @@ class Address extends Component {
                      </div>
                   ))}
                </div>
-            }
+            } 
 
          </div>
       );

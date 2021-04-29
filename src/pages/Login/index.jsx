@@ -14,26 +14,27 @@ export default function SignIn() {
                login(res.data.token)
                setIdUsuario(res.data.id)
                setNomeUsuario(res.data.name)
-
-               window.location.href = '/profile'
-
             } else {
                alert('Erro servidor');
             }
          })
    }
 
+   function handleCad() {
+      window.location.href = '/signup'
+   }
+
 
    return (
       <div>
-         <h1>SignIn</h1>
+         <h1>Entrar</h1>
          <input
             id="email"
             name="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             type="email" />
-            <br/>
+         <br />
          <input
             name="password"
             id="password"
@@ -43,6 +44,9 @@ export default function SignIn() {
          <button
             onClick={handleSubmit}
          >Entrar</button>
+            <button
+               onClick={handleCad}
+            >Cadastrar</button>
       </div>
    )
 }

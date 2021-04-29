@@ -1,6 +1,6 @@
-export const TOKEN_KEY = '&app-token';
-export const ID_USUARIO = '&id-usuario';
-export const NOME_USUARIO = '&nome-usuario'
+export const TOKEN_KEY = 'token';
+export const ID_USUARIO = 'id';
+export const NOME_USUARIO = 'name'
 
 export const login = token => {
    localStorage.setItem(TOKEN_KEY, token);

@@ -14,15 +14,9 @@ export default function AddAdress() {
 
    async function handleSubmit() {
       var id = getIdUsuario()
-      const data = { address: addressP, number: numberP, suplement: suplementP, cep: cepP, city: cityP }
+      const data = { address: addressP, number: numberP, suplement: suplementP, cep: cepP, state: stateP, city: cityP }
       if (addressP !== '' && numberP !== '' && suplementP !== '' && stateP !== '' && cepP !== '' && cityP !== '') {
-         console.log(data)
-         const response = await api.post('/perfil/'+ id +'/createaddress', data)
-         if (response.status === 201) {
-            window.location.href = '/profile'
-         } else {
-            alert('Erro ao cadastrar o endereço!')
-         }
+         await api.addAddress(id, data);
 
       } else {
          alert('Por favor, preencha todos os campos!')

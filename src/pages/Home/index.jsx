@@ -11,15 +11,14 @@ class Home extends Component {
    }
 
    async componentDidMount() {
-      const response = await api.get('/products/');
-      this.setState({ product: response.data })
+      const response = await api.getProducts();
+      this.setState({ product: response })
 
 
    }
 
    render() {
       const { product } = this.state
-      console.log(product.name)
 
       return (
          <div>
@@ -29,7 +28,7 @@ class Home extends Component {
 
                <div className='product-list' >
                   {product.map(product => (
-                     <div className='product-item' key={product.id}>
+                     <div className='product-item' key={product._id}>
                         <img src={product.image} alt={product.name} />
                         <div className='name'>{product.name}</div>
                         <div className='value'>R${product.value}</div>
