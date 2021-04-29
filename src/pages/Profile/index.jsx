@@ -32,7 +32,6 @@ class Profile extends Component {
                   {profile.email}
                </div>
             </div>
-            <button>Editar</button>
             <br />
             <br />
             <Address />
