@@ -13,13 +13,8 @@ function SignUp() {
       const data = { name: name, email: email, password: password }
 
       if (name !== '' && email !== '' && password !== '') {
-         const response = await api.post('/auth/signup', data)
-         if (response.status === 201) {
-
-            window.location.href = '/profile'
-         } else {
-            alert('Erro ao cadastrar o usuário!')
-         }
+         await api.addUser(data);
+         // window.location.href = '/profile'
 
       } else {
          alert('Por favor, preencha todos os campos!')

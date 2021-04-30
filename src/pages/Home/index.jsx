@@ -1,34 +1,37 @@
 import React, { Component } from "react";
 import api from "../../services/api";
+import "./Product.css";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: [],
+      products: [],
     };
   }
 
   async componentDidMount() {
-    const response = await api.getProduct("/products");
-
-    this.setState({ product: response.data });
+    const response = await api.getProducts();
+    this.setState({ products: response });
   }
 
   render() {
-    const { product } = this.state;
-    console.log(product.name);
+    const { products } = this.state;
 
     return (
       <div>
         <h1>Produtos</h1>
-        {product.map((product) => (
-          <li key={product.id}>
-            {product.image}
-            {product.name}
-            R${product.value}
-          </li>
-        ))}
+        <div className="container">
+          <div className="product-list">
+            {products.map((product) => (
+              <div className="product-item" key={product._id}>
+                <img src={product.image} alt={product.name} />
+                <div className="name">{product.name}</div>
+                <div className="value">R${product.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

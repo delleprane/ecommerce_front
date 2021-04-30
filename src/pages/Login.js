@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import api from "../services/api.jsx";
-
 class Login extends Component {
   state = {
     email: "",
@@ -18,8 +17,7 @@ class Login extends Component {
     event.preventDefault();
     try {
       await api.login(this.state);
-      this.props.handleLogin(true);
-      this.props.history.push("/products");
+      // this.props.handleLogin(true);
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +48,9 @@ class Login extends Component {
             ENTRAR
           </button>
         </form>
+        <a href="/signup">
+          <button>Cadastrar</button>
+        </a>
       </div>
     );
   }

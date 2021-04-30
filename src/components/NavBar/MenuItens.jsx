@@ -1,7 +1,7 @@
 export const MenuItens = [
    {
       title: 'Entrar',
-      url: '#',
+      url: '/signin',
       cName: 'nav-links',
       iName: 'fas fa-user'
    },
