@@ -2,6 +2,7 @@ import axios from "axios";
 class Api {
    constructor() {
       this.api = axios.create({
+         // baseURL: "http://localhost:5000/",
          baseURL: "https://loja-ironfit.herokuapp.com/",
       });
    }
@@ -75,8 +76,11 @@ class Api {
 
    getProduct = async (id) => {
       try {
-         const response = await this.api.get(`/products/${id}`);
-         return response.data;
+         const idProduct = id
+         const response = await this.api.get(`/products/`);
+         const arrayProducts = response.data
+         const responseItemFind = await arrayProducts.find(arrayProducts => arrayProducts._id === idProduct)
+         return responseItemFind;
       } catch (error) {
          console.error(error);
       }
