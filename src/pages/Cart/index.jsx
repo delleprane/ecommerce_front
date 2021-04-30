@@ -15,7 +15,10 @@ class Cart extends Component {
     try {
       const cart = await api.getCart();
       console.log(cart);
-      this.setState({ products: cart.products, cart: cart });
+      this.setState({
+        products: cart.products,
+        cart: cart,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -32,21 +35,26 @@ class Cart extends Component {
   };
 
   //FINALIZAR COMPRA
-  // finished() {
-  //
-  // }
+  finished = async () => {
+    try {
+      await api.finishCart(this.state.cart._id);
+      this.props.history.push({
+        pathname: "/resumecart",
+        state: this.state.cart,
+      });
+    } catch (error) {}
+  };
 
   render() {
     // console.log(this.state.cart.products);
     return (
       <div>
         <div>
-          <h1>CARRINHO</h1>
+          <h1> CARRINHO </h1>
           {this.state.products.map((product) => (
             <div key={product._id}>
-              <img src={product.image} />
-              <h3>{product.name}</h3>
-              <h4>R$ {product.value}</h4>
+              <img src={product.image} /> <h3> {product.name} </h3>{" "}
+              <h4> R$ {product.value} </h4>{" "}
               <div>
                 <button onClick={() => this.removeProduct(product._id)}>
                   REMOVE
@@ -55,17 +63,15 @@ class Cart extends Component {
             </div>
           ))}
         </div>
-
         <div>
-          <h2>TOTAL</h2>
-          Total ${" "}
+          <h2> TOTAL </h2>
+          Total $
           {this.state.products.reduce((acc, product) => {
             return acc + product.value;
           }, 0)}
         </div>
-
         <div>
-          <button onClick={this.finished}>Finalizar compra</button>
+          <button onClick={this.finished}> Finalizar compra </button>{" "}
         </div>
       </div>
     );

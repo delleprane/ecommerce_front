@@ -9,6 +9,7 @@ import Product from "./pages/Product/index";
 import Cart from "./pages/Cart/index.jsx";
 import Navbar from "./components/NavBar/Navbar.jsx";
 import "./App.css";
+import FinishedCart from "./pages/FinishedCart";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Route path="/product/:idproduct" component={Product} />
         <Route path="/cart" component={Cart} />
+        <Route path="/resumecart" component={FinishedCart} />
         <Route path="*" render={() => <h1>Not found 404!</h1>} />
       </Switch>
     </div>
