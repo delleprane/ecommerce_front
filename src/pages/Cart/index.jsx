@@ -50,9 +50,10 @@ class Cart extends Component {
         <div>
           <h1> CARRINHO </h1>
           {this.state.products.map((product) => (
-            <div key={product._id}>
-              <img src={product.image} alt={product.name} /> <h3> {product.name} </h3>{" "}
-              <h4> R$ {product.value} </h4>{" "}
+            <div className="product-item" key={product._id}>
+              <img src={product.image} />
+              <h3 className="name"> {product.name} </h3>
+              <h4 className="value"> R$ {product.value} </h4>
               <div>
                 <button onClick={() => this.removeProduct(product._id)}>
                   REMOVE

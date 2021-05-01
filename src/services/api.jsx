@@ -20,27 +20,27 @@ class Api {
    };
 
    addItemInCart = async (idUser, idProduct) => {
-      try {
-         const cartOfUser = await this.api.get('/carrinho/' + idUser);
-         if (cartOfUser.status === 200) {
-            const idCartofUser = cartOfUser.data._id
-            try {
-               const cartOfUser = await this.api.patch('/carrinho/' + idCartofUser + '/product/' + idProduct);
-               if (cartOfUser.status === 200) {
-                  alert('Produto adicionado ao carrinho!')
-               } else {
-                  alert('Erro ao inserir produto no carrinho!')
-               }
-            } catch (error) {
-               console.error(error)
+     try {
+const cartOfUser = await this.api.get('/carrinho/' + idUser);
+      if (cartOfUser.status === 200) {
+        const idCartofUser = cartOfUser.data._id
+         try {
+           const cartOfUser = await this.api.patch('/carrinho/' + idCartofUser + '/product/' + idProduct);
+            if (cartOfUser.status === 200) {
+               alert('Produto adicionado ao carrinho!')
+            } else {
+               alert('Erro ao inserir produto no carrinho!')
             }
-         } else {
-            alert('Erro ao adicionar item no carrinho!')
+        } catch (error) {
+           console.error(error)
          }
-      } catch (error) {
-         console.error(error)
-      }
-   };
+      } else {
+         alert('Erro ao adicionar item no carrinho!')
+     }
+   } catch (error) {
+      console.error(error)
+   }
+};
 
    deleteAddress = async (id) => {
       try {
@@ -175,56 +175,193 @@ class Api {
       } catch (error) {
          console.error(error);
       }
-   };
+   
+  };
 
-   getAddress = async () => {
-      try {
-         const id = await localStorage.getItem("id");
-         const response = await this.api.get(`/perfil/address/${id}`);
-         return response.data;
-      } catch (error) {
-         console.error(error);
-      }
-   };
+  deleteAddress = async (id) => {
+    try {
+      await this.api.delete("/perfil/" + id);
+      window.location.reload();
+    } catch (error) {}
+  };
 
-   getProducts = async () => {
-      try {
-         const response = await this.api.get(`/products/`);
-         return response.data;
-      } catch (error) {
-         console.error(error);
+  addAddress = async (id, data) => {
+    try {
+      const response = await this.api.post(
+        "/perfil/" + id + "/createaddress",
+        data
+      );
+      if (response.status === 201) {
+        window.location.href = "/profile";
+      } else {
+        alert("Erro ao cadastrar o endereço!");
       }
-   };
+    } catch (error) {}
+  };
 
-   getCart = async () => {
-      try {
-         const id = localStorage.getItem("id");
-         const response = await this.api.get(`/carrinho/${id}`);
-         return response.data;
-      } catch (error) {
-         console.error(error);
+  updateAddress = async (id, data) => {
+    try {
+      const response = await this.api.patch("/perfil/" + id, data);
+      if (response.status === 201) {
+        window.location.href = "/profile";
+      } else {
+        alert("Erro ao cadastrar o endereço!");
       }
-   };
+    } catch (error) {}
+  };
 
-   finishCart = async (idCart) => {
-      try {
-         const response = await this.api.patch(`/carrinho/finalizar/${idCart}`);
-         return response.data;
-      } catch (error) {
-         console.error(error);
+  addUser = async (data) => {
+    try {
+      const response = await this.api.post("/auth/signup", data);
+      if (response.status === 201) {
+        const { email, password } = data;
+        const payload = {
+          email: email,
+          password: password,
+        };
+        try {
+          const { data } = await this.api.post("/auth/login", payload);
+          const { token, id, name } = await data;
+          localStorage.setItem("token", token);
+          localStorage.setItem("id", id);
+          localStorage.setItem("name", name);
+          try {
+            const response = await this.api.post("/carrinho/" + data.id);
+            if (response.status === 400) {
+              alert("Usuário já possui um carrinho!");
+            } else if (response.status === 201) {
+              window.location.href = "/profile";
+            } else {
+              alert("Erro criar carrinho");
+            }
+          } catch (error) {
+            alert("Erro criar carrinho");
+          }
+        } catch {
+          alert("Erro ao fazer login!");
+        }
+      } else {
+        alert("Erro ao cadastrar o usuário!");
       }
-   };
+    } catch (error) {}
+  };
 
-   removeProduct = async (idCart, idProduct) => {
-      try {
-         const response = await this.api.patch(
-            `/carrinho/${idCart}/products/${idProduct}/delete`
-         );
-         return response.data;
-      } catch (error) {
-         console.error(error);
-      }
-   };
+  getProduct = async (id) => {
+    try {
+      const idProduct = id;
+      const response = await this.api.get(`/products/`);
+      const arrayProducts = response.data;
+      const responseItemFind = await arrayProducts.find(
+        (arrayProducts) => arrayProducts._id === idProduct
+      );
+      return responseItemFind;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  addUser = async (data) => {
+    try {
+      const response = await this.api.post("/auth/signup", data);
+      if (response.status === 201) {
+        const { email, password } = data;
+        const payload = {
+          email: email,
+          password: password,
+        };
+        try {
+          const { data } = await this.api.post("/auth/login", payload);
+          const { token, id, name } = await data;
+          localStorage.setItem("token", token);
+          localStorage.setItem("id", id);
+          localStorage.setItem("name", name);
+          window.location.href = "/profile";
+        } catch {
+          alert("Erro ao cadastrar o endereço!");
+        }
+    
+  };
+
+  getAddressById = async (idAddress) => {
+    try {
+      const idUser = await localStorage.getItem("id");
+      const response = await this.api.get(`/perfil/address/${idUser}`);
+      let arrayAddress = response.data;
+      const responseItemFind = await arrayAddress.find(
+        (arrayAddress) => arrayAddress._id === idAddress
+      );
+      return responseItemFind;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getProducts = async () => {
+    try {
+      const response = await this.api.get(`/products/`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  getProfile = async () => {
+    try {
+      const id = await localStorage.getItem("id");
+      const response = await this.api.get(`/perfil/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getAddress = async () => {
+    try {
+      const id = await localStorage.getItem("id");
+      const response = await this.api.get(`/perfil/address/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getProducts = async () => {
+    try {
+      const response = await this.api.get(`/products/`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  getCart = async () => {
+    try {
+      const id = localStorage.getItem("id");
+      const response = await this.api.get(`/carrinho/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  finishCart = async (idCart) => {
+    try {
+      const response = await this.api.patch(`/carrinho/finalizar/${idCart}`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  removeProduct = async (idCart, idProduct) => {
+    try {
+      const response = await this.api.patch(
+        `/carrinho/${idCart}/products/${idProduct}/delete`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }
 
 export default new Api();
