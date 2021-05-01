@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import api from "../../services/api";
+import "../../App.css";
 
 class oneProd extends Component {
   state = {
@@ -18,32 +19,22 @@ class oneProd extends Component {
   render() {
     const { product } = this.state;
     return (
-      <div>
-        <h1>one product</h1>
-
-        {product.name}
-        {product.description}
-        {product.value}
+      <div className="product">
+        <br />
+        <br />
+        <h1>{product.name}</h1>
+        <br />
+        <br />
         <img src={product.image} alt={product.name} />
-
-        <button>Adicionar ao Carrinho</button>
+        <br />
+        <br />
+        Descrição:{product.description}
+        <br />
+        <br />
+        Preço: R${product.value},00
       </div>
     );
   }
 }
 
 export default oneProd;
-
-{
-  /* <div className="container">
-          <div className="product-list">
-            {products.map((product) => (
-              <div className="product-item" key={product._id}>
-                <img src={product.image} alt={product.name} />
-                <div className="name">{product.name}</div>
-                <div className="value">R${product.value}</div>
-              </div>
-            ))}
-          </div>
-        </div> */
-}

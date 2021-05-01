@@ -11,9 +11,10 @@ class finishedCart extends Component {
       <div>
         <h1>Finished Cart</h1>
         {this.state.cart.products.map((product) => (
-          <div key={product._id}>
-            <img src={product.image} /> <h3> {product.name} </h3>{" "}
-            <h4> R$ {product.value} </h4> <div></div>
+          <div className="product-item" key={product._id}>
+            <img src={product.image} />
+            <h3 className="name"> {product.name} </h3>
+            <h4 className="value"> R$ {product.value} </h4> <div></div>
           </div>
         ))}
         <div>
