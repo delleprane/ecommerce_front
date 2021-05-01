@@ -1,33 +1,29 @@
-import React, { Component } from 'react';
-import api from '../../services/api';
-import './Product.css'
+import React, { Component } from "react";
+import api from "../../services/api";
+import "./Product.css";
 
 class Home extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         product: []
+         products: [],
       };
    }
 
    async componentDidMount() {
       const response = await api.getProducts();
-      this.setState({ product: response })
-
-
+      this.setState({ products: response });
    }
 
    render() {
-      const { product } = this.state
+      const { products } = this.state;
 
       return (
          <div>
-
             <h1>Produtos</h1>
-            <div className='container'>
-
-               <div className='product-list' >
-                  {product.map(product => (
+            <div className="container">
+               <div className="product-list">
+                  {products.map((product) => (
                      <a href={"/product/" + product._id} key={product._id}>
                         <div className='product-item'>
                            <img src={product.image} alt={product.name} />
@@ -37,15 +33,10 @@ class Home extends Component {
                      </a>
                   ))}
                </div>
-
             </div>
-
-
-
          </div>
       );
-   };
-};
+   }
+}
 
-export default Home
-
+export default Home;
