@@ -3,7 +3,7 @@ class Api {
    constructor() {
       this.api = axios.create({
          baseURL: "http://localhost:5000/",
-         // baseURL: "https://loja-ironfit.herokuapp.com/",
+            // baseURL: "https://loja-ironfit.herokuapp.com/",
       });
    }
 
