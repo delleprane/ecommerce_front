@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import api from '../../services/api'
 
-function SignUp() {
+function SignUp(props) {
 
    //Lembrar de colocar verificação se email já esta sendo usado
    const [name, setName] = useState('');
@@ -14,7 +14,7 @@ function SignUp() {
 
       if (name !== '' && email !== '' && password !== '') {
          await api.addUser(data);
-         window.location.href = '/profile'
+         props.history.push('/signin') 
       } else {
          alert('Por favor, preencha todos os campos!')
       }
