@@ -14,7 +14,7 @@ class Api {
          localStorage.setItem("token", token);
          localStorage.setItem("id", id);
          localStorage.setItem("name", name);
-         window.location.href = '/profile'
+         window.location.href = "/profile";
       } catch (error) { }
    };
 
@@ -24,7 +24,7 @@ class Api {
          window.location.reload()
       } catch (error) { }
    }
-   
+
 
    addAddress = async (id, data) => {
       try {
@@ -86,21 +86,35 @@ class Api {
       }
    };
 
-   getProfile = async () => {
+   addUser = async (data) => {
       try {
-         const id = await localStorage.getItem('id')
-         const response = await this.api.get(`/perfil/${id}`);
-         return response.data;
-      } catch (error) {
-         console.error(error);
-      }
+         const response = await this.api.post("/auth/signup", data);
+         if (response.status === 201) {
+            const { email, password } = data;
+            const payload = {
+               email: email,
+               password: password,
+            };
+            try {
+               const { data } = await this.api.post("/auth/login", payload);
+               const { token, id, name } = await data;
+               localStorage.setItem("token", token);
+               localStorage.setItem("id", id);
+               localStorage.setItem("name", name);
+               window.location.href = "/profile";
+            } catch {
+               alert("Erro ao cadastrar o endereço!");
+            }
+         } else {
+            alert("Erro ao cadastrar o endereço!");
+         }
+      } catch (error) { }
    };
 
-   getAddress = async () => {
+   getProduct = async (id) => {
       try {
-         const id = await localStorage.getItem('id')
-         const response = await this.api.get(`/perfil/address/${id}`);
-         return response.data;
+         const response = await this.api.get(`/products/${id}`);
+         return response.data.product;
       } catch (error) {
          console.error(error);
       }
@@ -126,8 +140,64 @@ class Api {
          console.error(error);
       }
    };
+   getProfile = async () => {
+      try {
+         const id = await localStorage.getItem("id");
+         const response = await this.api.get(`/perfil/${id}`);
+         return response.data;
+      } catch (error) {
+         console.error(error);
+      }
+   };
 
+   getAddress = async () => {
+      try {
+         const id = await localStorage.getItem("id");
+         const response = await this.api.get(`/perfil/address/${id}`);
+         return response.data;
+      } catch (error) {
+         console.error(error);
+      }
+   };
 
+   getProducts = async () => {
+      try {
+         const response = await this.api.get(`/products/`);
+         return response.data;
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   getCart = async () => {
+      try {
+         const id = localStorage.getItem("id");
+         const response = await this.api.get(`/carrinho/${id}`);
+         return response.data;
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   finishCart = async (idCart) => {
+      try {
+         const response = await this.api.patch(`/carrinho/finalizar/${idCart}`);
+         return response.data;
+      } catch (error) {
+         console.error(error);
+      }
+   };
+
+   removeProduct = async (idCart, idProduct) => {
+      try {
+         const response = await this.api.patch(
+            `/carrinho/${idCart}/products/${idProduct}/delete`
+         );
+         return response.data;
+      } catch (error) {
+         console.error(error);
+      }
+   };
 }
 
 export default new Api();

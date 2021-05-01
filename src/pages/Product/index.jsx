@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import api from "../../services/api";
 import '../../App.css'
 
-class index extends Component {
+class oneProd extends Component {
    state = {
       product: {},
    };
@@ -19,19 +19,18 @@ class index extends Component {
    render() {
       const { product } = this.state;
       return (
-         <div className="product" >
-            <br /><br />
-            <h1>{product.name}</h1>
-            <br /><br />
+         <div>
+            <h1>one product</h1>
+
+            {product.name}
+            {product.description}
+            {product.value}
             <img src={product.image} alt={product.name} />
-            <br /><br />
-        Descrição:{product.description}
-            <br /><br />
-        Preço:
-        R${product.value},00
+
+            <button>Adicionar ao Carrinho</button>
          </div>
       );
    }
 }
 
-export default index;
+export default oneProd;
