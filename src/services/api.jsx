@@ -108,21 +108,6 @@ class Api {
       } catch (error) { }
    };
 
-   // addCartToUser = async () => {
-   //   try {
-   //    const response = await this.api.post('/carrinho/' + idUser);
-   //    if (response.status === 400) {
-   //       alert('Usuário já possui um carrinho!')
-   //    } else if (response.status === 201) {
-   //       window.location.href = '/profile'
-   //    } else {
-   //       alert('Erro criar carrinho')
-   //    }
-   //   } catch (error) {
-
-   //   }
-   // }
-
    getProduct = async (id) => {
       try {
          const idProduct = id
@@ -160,14 +145,6 @@ class Api {
       } catch (error) { }
    };
 
-   getProduct = async (id) => {
-      try {
-         const response = await this.api.get(`/products/${id}`);
-         return response.data.product;
-      } catch (error) {
-         console.error(error);
-      }
-   };
 
    getAddressById = async (idAddress) => {
       try {
