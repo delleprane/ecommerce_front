@@ -14,8 +14,7 @@ function SignUp() {
 
       if (name !== '' && email !== '' && password !== '') {
          await api.addUser(data);
-         // window.location.href = '/profile'
-
+         window.location.href = '/profile'
       } else {
          alert('Por favor, preencha todos os campos!')
       }

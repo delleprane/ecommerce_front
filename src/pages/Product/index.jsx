@@ -14,7 +14,14 @@ class index extends Component {
       } catch (error) {
          console.error(error);
       }
+
    };
+
+   handleAddItemInCart = async () => {
+      const idProduct = this.state.product._id
+      const idUser =  localStorage.getItem('id')
+      await api.addItemInCart(idUser, idProduct);
+   }
 
    render() {
       const { product } = this.state;
@@ -29,6 +36,9 @@ class index extends Component {
             <br /><br />
         Preço:
         R${product.value},00
+            <br /><br />
+            <button onClick={this.handleAddItemInCart}>
+               Adicionar no Carrinho</button>
          </div>
       );
    }

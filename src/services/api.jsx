@@ -18,13 +18,36 @@ class Api {
       } catch (error) { }
    };
 
+   addItemInCart = async (idUser, idProduct) => {
+      try {
+         const cartOfUser = await this.api.get('/carrinho/' + idUser);
+         if (cartOfUser.status === 200) {
+            const idCartofUser = cartOfUser.data._id
+            try {
+               const cartOfUser = await this.api.patch('/carrinho/' + idCartofUser + '/product/' + idProduct);
+               if (cartOfUser.status === 200) {
+                  alert('Produto adicionado ao carrinho!')
+               } else {
+                  alert('Erro ao inserir produto no carrinho!')
+               }
+            } catch (error) {
+               console.error(error)
+            }
+         } else {
+            alert('Erro ao adicionar item no carrinho!')
+         }
+      } catch (error) {
+         console.error(error)
+      }
+   };
+
    deleteAddress = async (id) => {
       try {
          await this.api.delete("/perfil/" + id);
          window.location.reload()
       } catch (error) { }
    }
-   
+
 
    addAddress = async (id, data) => {
       try {
@@ -64,15 +87,41 @@ class Api {
                localStorage.setItem("token", token);
                localStorage.setItem("id", id);
                localStorage.setItem("name", name);
-               window.location.href = '/profile'
+               try {
+                  const response = await this.api.post('/carrinho/' + data.id);
+                  if (response.status === 400) {
+                     alert('Usuário já possui um carrinho!')
+                  } else if (response.status === 201) {
+                     window.location.href = '/profile'
+                  } else {
+                     alert('Erro criar carrinho')
+                  }
+               } catch (error) {
+                  alert('Erro criar carrinho')
+               }
             } catch {
-               alert('Erro ao cadastrar o endereço!')
+               alert('Erro ao fazer login!')
             }
          } else {
-            alert('Erro ao cadastrar o endereço!')
+            alert('Erro ao cadastrar o usuário!')
          }
       } catch (error) { }
    };
+
+   // addCartToUser = async () => {
+   //   try {
+   //    const response = await this.api.post('/carrinho/' + idUser);
+   //    if (response.status === 400) {
+   //       alert('Usuário já possui um carrinho!')
+   //    } else if (response.status === 201) {
+   //       window.location.href = '/profile'
+   //    } else {
+   //       alert('Erro criar carrinho')
+   //    }
+   //   } catch (error) {
+
+   //   }
+   // }
 
    getProduct = async (id) => {
       try {
