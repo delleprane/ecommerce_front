@@ -9,7 +9,7 @@ https://slides.com/delleprane/iron-fit
 ### Made by Fernanda- [LinkedIn link](https://www.linkedin.com/in/fernanda-delleprane/") & Kleber-[LinkedIn link](https://www.linkedin.com/in/bastoskp/")
 
 # IronFit
-[Link](http://localhost/)。
+[Link](https://loja-ironfitness.herokuapp.com/)。
 # O que é o Iron fit?
  O Iron Fit é um e-commerce de suplementos onde é possível cadastrar usuários,adicionar,editar e deletar endereço de usuários,trazer todos os produtos e ter mais informações de um produto específico,adicionar e remover dos favoritos,adicionar e remover do carrinho de compras,trazer todas as compras feitas, trazer produtos
 # O que o Iron fit é capaz de fazer?
