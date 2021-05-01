@@ -7,7 +7,7 @@ import axios from "axios";
 class Api {
   constructor() {
     this.api = axios.create({
-      baseURL: "http://localhost:5001",
+      baseURL: "http://localhost:5000",
     });
   }
 
@@ -102,9 +102,7 @@ class Api {
   getCart = async () => {
     try {
       const id = localStorage.getItem("id");
-      console.log(id);
       const response = await this.api.get(`/carrinho/${id}`);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.error(error);

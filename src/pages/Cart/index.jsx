@@ -14,7 +14,6 @@ class Cart extends Component {
   updateCart = async () => {
     try {
       const cart = await api.getCart();
-      console.log(cart);
       this.setState({
         products: cart.products,
         cart: cart,
@@ -46,14 +45,13 @@ class Cart extends Component {
   };
 
   render() {
-    // console.log(this.state.cart.products);
     return (
       <div>
         <div>
           <h1> CARRINHO </h1>
           {this.state.products.map((product) => (
             <div key={product._id}>
-              <img src={product.image} /> <h3> {product.name} </h3>{" "}
+              <img src={product.image} alt={product.name} /> <h3> {product.name} </h3>{" "}
               <h4> R$ {product.value} </h4>{" "}
               <div>
                 <button onClick={() => this.removeProduct(product._id)}>

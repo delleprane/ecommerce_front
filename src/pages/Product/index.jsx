@@ -33,17 +33,3 @@ class oneProd extends Component {
 }
 
 export default oneProd;
-
-{
-  /* <div className="container">
-          <div className="product-list">
-            {products.map((product) => (
-              <div className="product-item" key={product._id}>
-                <img src={product.image} alt={product.name} />
-                <div className="name">{product.name}</div>
-                <div className="value">R${product.value}</div>
-              </div>
-            ))}
-          </div>
-        </div> */
-}

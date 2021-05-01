@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import api from "../../services/api";
 
 class finishedCart extends Component {
   state = {
@@ -12,7 +11,7 @@ class finishedCart extends Component {
         <h1>Finished Cart</h1>
         {this.state.cart.products.map((product) => (
           <div key={product._id}>
-            <img src={product.image} /> <h3> {product.name} </h3>{" "}
+            <img src={product.image} alt={product.name} /> <h3> {product.name} </h3>{" "}
             <h4> R$ {product.value} </h4> <div></div>
           </div>
         ))}
