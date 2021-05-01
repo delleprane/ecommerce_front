@@ -24,11 +24,13 @@ class Home extends Component {
         <div className="container">
           <div className="product-list">
             {products.map((product) => (
-              <div className="product-item" key={product._id}>
-                <img src={product.image} alt={product.name} />
-                <div className="name">{product.name}</div>
-                <div className="value">R${product.value}</div>
-              </div>
+              <a href={"/product/" + product._id} key={product._id}>
+                <div className="product-item">
+                  <img src={product.image} alt={product.name} />
+                  <div className="name">{product.name}</div>
+                  <div className="value">R${product.value}</div>
+                </div>
+              </a>
             ))}
           </div>
         </div>

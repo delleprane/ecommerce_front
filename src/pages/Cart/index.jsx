@@ -14,7 +14,6 @@ class Cart extends Component {
   updateCart = async () => {
     try {
       const cart = await api.getCart();
-      console.log(cart);
       this.setState({
         products: cart.products,
         cart: cart,
@@ -46,7 +45,6 @@ class Cart extends Component {
   };
 
   render() {
-    // console.log(this.state.cart.products);
     return (
       <div>
         <div>

@@ -1,5 +1,4 @@
 import axios from "axios";
-
 class Api {
   constructor() {
     this.api = axios.create({
@@ -17,6 +16,31 @@ class Api {
       localStorage.setItem("name", name);
       window.location.href = "/profile";
     } catch (error) {}
+  };
+
+  addItemInCart = async (idUser, idProduct) => {
+    try {
+      const cartOfUser = await this.api.get("/carrinho/" + idUser);
+      if (cartOfUser.status === 200) {
+        const idCartofUser = cartOfUser.data._id;
+        try {
+          const cartOfUser = await this.api.patch(
+            "/carrinho/" + idCartofUser + "/product/" + idProduct
+          );
+          if (cartOfUser.status === 200) {
+            alert("Produto adicionado ao carrinho!");
+          } else {
+            alert("Erro ao inserir produto no carrinho!");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        alert("Erro ao adicionar item no carrinho!");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   deleteAddress = async (id) => {
@@ -66,12 +90,23 @@ class Api {
           localStorage.setItem("token", token);
           localStorage.setItem("id", id);
           localStorage.setItem("name", name);
-          window.location.href = "/profile";
+          try {
+            const response = await this.api.post("/carrinho/" + data.id);
+            if (response.status === 400) {
+              alert("Usuário já possui um carrinho!");
+            } else if (response.status === 201) {
+              window.location.href = "/profile";
+            } else {
+              alert("Erro criar carrinho");
+            }
+          } catch (error) {
+            alert("Erro criar carrinho");
+          }
         } catch {
-          alert("Erro ao cadastrar o endereço!");
+          alert("Erro ao fazer login!");
         }
       } else {
-        alert("Erro ao cadastrar o endereço!");
+        alert("Erro ao cadastrar o usuário!");
       }
     } catch (error) {}
   };
@@ -115,15 +150,28 @@ class Api {
     } catch (error) {}
   };
 
-  getProduct = async (id) => {
+  getAddressById = async (idAddress) => {
     try {
-      const response = await this.api.get(`/products/${id}`);
-      return response.data.product;
+      const idUser = await localStorage.getItem("id");
+      const response = await this.api.get(`/perfil/address/${idUser}`);
+      let arrayAddress = response.data;
+      const responseItemFind = await arrayAddress.find(
+        (arrayAddress) => arrayAddress._id === idAddress
+      );
+      return responseItemFind;
     } catch (error) {
       console.error(error);
     }
   };
 
+  getProducts = async () => {
+    try {
+      const response = await this.api.get(`/products/`);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
   getProfile = async () => {
     try {
       const id = await localStorage.getItem("id");
@@ -156,31 +204,7 @@ class Api {
   getCart = async () => {
     try {
       const id = localStorage.getItem("id");
-      console.log(id);
       const response = await this.api.get(`/carrinho/${id}`);
-      console.log(response);
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  getAddressById = async (idAddress) => {
-    try {
-      const idUser = await localStorage.getItem("id");
-      const response = await this.api.get(`/perfil/address/${idUser}`);
-      let arrayAddress = response.data;
-      const responseItemFind = await arrayAddress.find(
-        (arrayAddress) => arrayAddress._id === idAddress
-      );
-      return responseItemFind;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  getProducts = async () => {
-    try {
-      const response = await this.api.get(`/products/`);
       return response.data;
     } catch (error) {
       console.error(error);

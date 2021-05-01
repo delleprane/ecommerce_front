@@ -6,7 +6,7 @@ import SignIn from "./pages/Login";
 import Profile from "./pages/Profile";
 import AddAdress from "./pages/Register/Address";
 import EditAdress from "./pages/Edit/Address";
-import Product from "./pages/Product/index.jsx";
+import Product from "./pages/Product/index";
 import Cart from "./pages/Cart/index.jsx";
 import Navbar from "./components/NavBar/Navbar.jsx";
 import "./App.css";
@@ -19,13 +19,14 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/addAddress" component={AddAdress} />
+        <Route path="/editAddress/:idaddress" component={EditAdress} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/profile" component={Profile} />
         <Route path="/product/:idproduct" component={Product} />
+        <Route path="*" render={() => <h1>Not found 404!</h1>} />
         <Route path="/cart" component={Cart} />
         <Route path="/resumecart" component={FinishedCart} />
-        <Route path="*" render={() => <h1>Not found 404!</h1>} />
       </Switch>
     </div>
   );

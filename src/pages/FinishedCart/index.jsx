@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import api from "../../services/api";
 
 class finishedCart extends Component {
   state = {
