@@ -2,7 +2,7 @@ import axios from "axios";
 class Api {
    constructor() {
       this.api = axios.create({
-         
+
          //baseURL: "http://localhost:5000/",
          baseURL: "https://loja-ironfit.herokuapp.com/",
       });
@@ -201,23 +201,23 @@ class Api {
    //};
 
 
-   getProducts = async () => {
+   /*  getProducts = async () => {
+       try {
+          const response = await this.api.get(`/products/`);
+          return response.data;
+       } catch (error) {
+          console.error(error);
+       }
+    };
+  */
+  /*  getProducts = async () => {
       try {
          const response = await this.api.get(`/products/`);
          return response.data;
       } catch (error) {
          console.error(error);
       }
-   };
-
-   // getProducts = async () => {
-   //  try {
-   //   const response = await this.api.get(`/products/`);
-   // return response.data;
-   //} catch (error) {
-   // console.error(error);
-   //}
-   //};
+   }; */
 
 
    getAddress = async () => {
@@ -231,7 +231,7 @@ class Api {
    };
 
 
-    getCart = async () => {
+   getCart = async () => {
       try {
          const id = localStorage.getItem("id");
          const response = await this.api.get(`/carrinho/${id}`);
