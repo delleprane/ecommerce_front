@@ -1,7 +1,12 @@
 ### Iron Fit
 
-![](https://pandao.github.io/editor.md/images/logos/editormd-logo-180x180.png)
-######Made by Fernanda- [LinkedIn link](https://www.linkedin.com/in/fernanda-delleprane/") & Kleber-[LinkedIn link](https://www.linkedin.com/in/bastoskp/")
+## link Back End: 
+https://github.com/delleprane/ecommerce_api
+
+## link Apresentação:
+https://slides.com/delleprane/iron-fit
+
+### Made by Fernanda- [LinkedIn link](https://www.linkedin.com/in/fernanda-delleprane/") & Kleber-[LinkedIn link](https://www.linkedin.com/in/bastoskp/")
 
 # IronFit
 [Link](http://localhost/)。
@@ -19,8 +24,6 @@
 
 # Como iniciar
     npm start
-
-# Endpoints
 
 
 
@@ -41,5 +44,5 @@
 # Getting started
     npm start
 
-# Endpoints
+
 

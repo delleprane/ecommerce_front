@@ -2,8 +2,8 @@ import axios from "axios";
 class Api {
    constructor() {
       this.api = axios.create({
-         // baseURL: "http://localhost:5000/",
-         baseURL: "https://loja-ironfit.herokuapp.com/",
+        baseURL: "http://localhost:5000/",
+        // baseURL: "https://loja-ironfit.herokuapp.com/",
       });
    }
 
@@ -14,7 +14,8 @@ class Api {
          localStorage.setItem("token", token);
          localStorage.setItem("id", id);
          localStorage.setItem("name", name);
-         window.location.href = "/profile";
+        // this.api.headers.post['Authorization'] = 'Bearer ' + data.token
+          window.location.href = "/profile";
       } catch (error) { }
    };
 
